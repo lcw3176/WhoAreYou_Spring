@@ -1,6 +1,5 @@
-package com.joebrooks.whoareyou.Log;
+package com.joebrooks.whoareyou.Entity;
 
-import com.joebrooks.whoareyou.User.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +15,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Table(name = "log")
-public class Log {
+public class LogEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "logid")
+    @Column(name = "log_idx")
     private Long id;
 
     @CreationTimestamp
@@ -31,7 +30,17 @@ public class Log {
     private int state;
 
     @ManyToOne
-    @JoinColumn(name = "userid")
-    private User user;
+    @JoinColumn(name ="user_idx", referencedColumnName = "idx")
+    private UserEntity user;
 
+//  create table log(
+//  log_idx int primary key auto_increment,
+//  time timestamp not null,
+//  state int not null,
+//  user_idx int,
+//  foreign key(user_idx)
+//  references user(idx)
+//  on update cascade
+//  on delete cascade);
+//
 }
