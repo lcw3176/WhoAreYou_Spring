@@ -1,19 +1,19 @@
 package com.joebrooks.whoareyou.Controller;
 
+import com.joebrooks.whoareyou.Common.JwtTokenProvider;
 import com.joebrooks.whoareyou.Common.Response.ResponseCode;
 import com.joebrooks.whoareyou.Common.Response.ResponseResult;
 import com.joebrooks.whoareyou.DTO.Response;
 import com.joebrooks.whoareyou.Service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/{userId}/{userPw}")
     public Response tryLogin(@PathVariable("userId") String id, @PathVariable("userPw") String pw){
@@ -28,6 +28,7 @@ public class UserController {
 
         return Response.builder()
                        .code(ResponseCode.success)
+                       .result(jwtTokenProvider.createToken(id))
                        .build();
     }
 

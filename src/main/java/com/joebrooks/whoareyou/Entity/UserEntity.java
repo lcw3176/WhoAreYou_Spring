@@ -30,5 +30,5 @@ public class UserEntity {
 //    idx int primary key auto_increment,
 //    email varchar(40) not null,
 //    password varchar(64) not null
-//    )
+//    );
 }
