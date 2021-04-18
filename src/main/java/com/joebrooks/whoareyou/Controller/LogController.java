@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/auth/log")
+@RequestMapping("/auth/logs")
 @RequiredArgsConstructor
 public class LogController {
 
