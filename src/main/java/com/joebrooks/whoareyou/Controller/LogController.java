@@ -19,7 +19,7 @@ public class LogController {
     private final LogService logService;
 
     @GetMapping("/{userId}")
-    public Response hello(@PathVariable("userId") String userId) throws JsonProcessingException {
+    public Response getLogs(@PathVariable("userId") String userId) throws JsonProcessingException {
 
         String json = logService.getLogs(userId);
 
