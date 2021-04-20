@@ -29,6 +29,9 @@ public class LogEntity {
     @Column(name = "state")
     private int state;
 
+    @Column(name = "device_name")
+    private String deviceName;
+
     @ManyToOne
     @JoinColumn(name ="user_idx", referencedColumnName = "idx")
     private UserEntity user;
@@ -37,6 +40,7 @@ public class LogEntity {
 //  log_idx int primary key auto_increment,
 //  time timestamp not null,
 //  state int not null,
+//  device_name varchar(20) not null,
 //  user_idx int,
 //  foreign key(user_idx)
 //  references user(idx)

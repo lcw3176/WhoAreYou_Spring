@@ -1,11 +1,9 @@
 package com.joebrooks.whoareyou.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.joebrooks.whoareyou.DTO.Device;
 import com.joebrooks.whoareyou.DTO.Log;
-import com.joebrooks.whoareyou.Entity.LogEntity;
 import com.joebrooks.whoareyou.Entity.UserEntity;
 import com.joebrooks.whoareyou.Repository.LogRepository;
 import com.joebrooks.whoareyou.Repository.UserRepository;
@@ -17,23 +15,23 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class LogService {
+public class DeviceService {
     private final LogRepository logRepository;
     private final UserRepository userRepository;
 
-    public String getLogs(String email) throws JsonProcessingException {
+    public String getAllDevices(String email) throws JsonProcessingException {
         UserEntity user = userRepository.findByEmail(email);
-        List<Log> logs = new ArrayList<>();
+        List<Device> devices = new ArrayList<>();
 
         for(var i : logRepository.findAllByUserIdx(user.getIdx())){
-            logs.add(Log.builder()
+            devices.add(Device.builder()
+                    .name(i.getDeviceName())
                     .time(i.getTime())
-                    .state(i.getState() != 0)
                     .build());
         }
 
-        if (logs.size() != 0) {
-            return new JsonMapper().writeValueAsString(logs).replace("\"", "");
+        if (devices.size() != 0) {
+            return new JsonMapper().writeValueAsString(devices).replace("\"", "");
         }
 
         return null;

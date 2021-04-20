@@ -19,7 +19,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             throws Exception{
         String token = jwtTokenProvider.resolveToken(request);
 
-        if(token == null || jwtTokenProvider.isValidate(token)){
+        if(token == null || !jwtTokenProvider.isValidate(token)){
             response.sendRedirect("/error/noAuth");
             return false;
         }
