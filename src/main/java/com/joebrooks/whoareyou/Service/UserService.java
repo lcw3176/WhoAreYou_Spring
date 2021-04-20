@@ -2,15 +2,13 @@ package com.joebrooks.whoareyou.Service;
 
 import com.joebrooks.whoareyou.Entity.UserEntity;
 import com.joebrooks.whoareyou.Repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     public Boolean isMember(String email, String pw){
         Object obj = userRepository.findByEmailAndPassword(email, pw);

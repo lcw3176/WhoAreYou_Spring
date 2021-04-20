@@ -4,4 +4,6 @@ public enum ResponseResult {
     notMember,
     existMember,
     wrongValue,
+    wrongRequest,
+    notAllowed
 }
