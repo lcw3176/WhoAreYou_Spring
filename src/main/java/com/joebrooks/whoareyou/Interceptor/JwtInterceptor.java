@@ -17,12 +17,12 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception{
-//        String token = jwtTokenProvider.resolveToken(request);
-//
-//        if(token == null || jwtTokenProvider.isValidate(token)){
-//            response.sendRedirect("/error/noAuth");
-//            return false;
-//        }
+        String token = jwtTokenProvider.resolveToken(request);
+
+        if(token == null || jwtTokenProvider.isValidate(token)){
+            response.sendRedirect("/error/noAuth");
+            return false;
+        }
 
         return true;
     }
