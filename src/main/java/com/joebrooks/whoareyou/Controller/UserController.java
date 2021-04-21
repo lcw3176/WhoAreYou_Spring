@@ -22,7 +22,7 @@ public class UserController {
 
             return Response.builder()
                            .code(ResponseCode.notFound)
-                           .result(ResponseResult.notMember.toString())
+                           .result(ResponseResult.notMember)
                            .build();
         }
 
@@ -35,11 +35,12 @@ public class UserController {
 
     @PostMapping
     public Response trySignUp(@RequestParam("email") String email, @RequestParam("password") String pw){
+
         if(!userService.trySignUp(email, pw)){
 
             return Response.builder()
                            .code(ResponseCode.notAllowed)
-                           .result(ResponseResult.existMember.toString())
+                           .result(ResponseResult.existMember)
                            .build();
         }
 

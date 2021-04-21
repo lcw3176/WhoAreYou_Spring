@@ -11,9 +11,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     public Boolean isMember(String email, String pw){
-        Object obj = userRepository.findByEmailAndPassword(email, pw);
+        Object result = userRepository.findByEmailAndPassword(email, pw);
 
-        if(obj == null){
+        if(result == null){
             return false;
         }
 

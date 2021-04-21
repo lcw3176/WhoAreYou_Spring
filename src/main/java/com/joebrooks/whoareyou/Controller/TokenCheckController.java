@@ -2,6 +2,7 @@ package com.joebrooks.whoareyou.Controller;
 
 import com.joebrooks.whoareyou.Common.JwtTokenProvider;
 import com.joebrooks.whoareyou.Common.Response.ResponseCode;
+import com.joebrooks.whoareyou.Common.Response.ResponseResult;
 import com.joebrooks.whoareyou.DTO.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class TokenCheckController {
             
             return Response.builder()
                     .code(ResponseCode.wrongRequest)
+                    .result(ResponseResult.wrongValue)
                     .build();
         }
 

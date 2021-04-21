@@ -14,7 +14,7 @@ public class CustomErrorController implements ErrorController {
 
         return Response.builder()
                 .code(ResponseCode.wrongRequest)
-                .result(ResponseResult.wrongRequest.toString())
+                .result(ResponseResult.wrongRequest)
                 .build();
     }
 
@@ -23,7 +23,7 @@ public class CustomErrorController implements ErrorController {
 
         return Response.builder()
                 .code(ResponseCode.notAllowed)
-                .result(ResponseResult.notAllowed.toString())
+                .result(ResponseResult.notAllowed)
                 .build();
     }
 

@@ -2,7 +2,6 @@ package com.joebrooks.whoareyou.Controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.joebrooks.whoareyou.Common.Response.ResponseCode;
-import com.joebrooks.whoareyou.Common.Response.ResponseResult;
 import com.joebrooks.whoareyou.DTO.Response;
 import com.joebrooks.whoareyou.Service.LogService;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
     private final LogService logService;
 
-    @GetMapping("/{userId}")
-    public Response getLogs(@PathVariable("userId") String userId) throws JsonProcessingException {
+    @GetMapping("/{deviceName}")
+    public Response getLogs(@PathVariable("deviceName") String deviceName) throws JsonProcessingException {
 
-        String json = logService.getLogs(userId);
+        String json = logService.getLogs(deviceName);
 
         if(json != null){
             return Response.builder()
