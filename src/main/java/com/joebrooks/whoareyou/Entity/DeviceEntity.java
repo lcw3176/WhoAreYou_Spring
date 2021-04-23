@@ -36,4 +36,7 @@ public class DeviceEntity {
 //  on update cascade
 //  on delete cascade);
 
+
+
+
 }

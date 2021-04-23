@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<DeviceEntity, Long> {
     List<DeviceEntity> findAllByUser_Idx(Long userIdx);
-    DeviceEntity findByName(String name);
+    DeviceEntity findByNameAndUser_Idx(String name, Long userIdx);
 }

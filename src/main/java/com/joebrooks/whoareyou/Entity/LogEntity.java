@@ -42,5 +42,6 @@ public class LogEntity {
 //  references device(idx)
 //  on update cascade
 //  on delete cascade);
-//
+
+//  ALTER TABLE log CHANGE time time TIMESTAMP ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL;
 }
