@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Component
@@ -22,16 +22,25 @@ public class JwtTokenProvider {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String createToken(String value){
-        Claims claims = Jwts.claims().setSubject(value);
-
+    public String createToken(String email){
         Date now = new Date();
 
         return Jwts.builder()
-                .setClaims(claims)
+                .claim("email", email)
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
+    }
+
+    public String getEmailFromClaims(String token){
+        Claims claims = Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
+
+        Map<String, Object> map = (Map<String, Object>) claims;
+
+        return  map.get("email").toString();
     }
 
 
