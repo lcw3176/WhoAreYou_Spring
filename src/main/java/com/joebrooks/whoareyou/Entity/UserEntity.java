@@ -28,7 +28,7 @@ public class UserEntity {
 
 //    create table user(
 //    idx int primary key auto_increment,
-//    email varchar(40) not null,
+//    email varchar(40) not null unique,
 //    password varchar(64) not null
 //    );
 }
