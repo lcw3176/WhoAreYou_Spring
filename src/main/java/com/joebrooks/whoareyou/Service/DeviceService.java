@@ -43,9 +43,7 @@ public class DeviceService {
         return null;
     }
 
-    public Device getDeviceByTokenAndDeviceName(String token, String deviceName){
-        String email = jwtTokenProvider.getEmailFromClaims(token);
-
+    public Device getDeviceByEmailAndDeviceName(String email, String deviceName){
         UserEntity user = userRepository.findByEmail(email);
         DeviceEntity entity = deviceRepository.findByNameAndUser_Idx(deviceName, user.getIdx());
 

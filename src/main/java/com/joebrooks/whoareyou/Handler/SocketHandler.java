@@ -24,18 +24,18 @@ public class SocketHandler extends TextWebSocketHandler {
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
 
         String[] values = message.getPayload().toString().split(",");
-        String token = values[0];
+        String email = values[0];
         String deviceName = values[1];
         String state = values[2];
 
-        Device device = deviceService.getDeviceByTokenAndDeviceName(token, deviceName);
+        Device device = deviceService.getDeviceByEmailAndDeviceName(email, deviceName);
 
         HashMap<String, Object> obj = new HashMap<>();
         obj.put("name", device.getName());
         obj.put("state", state);
 
         for(var i : sessionMap.keySet()){
-            if(i.equals(token)){
+            if(i.equals(email)){
                 try{
                     sessionMap.get(i).sendMessage(new TextMessage(Response.builder()
                             .code(ResponseCode.success)
@@ -52,12 +52,12 @@ public class SocketHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        sessionMap.put(session.getAttributes().get("token").toString(), session);
+        sessionMap.put(session.getAttributes().get("email").toString(), session);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        sessionMap.remove(session.getAttributes().get("token").toString());
+        sessionMap.remove(session.getAttributes().get("email").toString());
     }
 
 }
