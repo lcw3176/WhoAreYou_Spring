@@ -2,7 +2,6 @@ package com.joebrooks.whoareyou.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.joebrooks.whoareyou.Common.JwtTokenProvider;
 import com.joebrooks.whoareyou.DTO.Device;
 import com.joebrooks.whoareyou.Entity.DeviceEntity;
 import com.joebrooks.whoareyou.Entity.UserEntity;
@@ -13,13 +12,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DeviceService {
     private final DeviceRepository deviceRepository;
     private final UserRepository userRepository;
-    private final JwtTokenProvider jwtTokenProvider;
 
 
     public String getAllDevices(String email) throws JsonProcessingException {
@@ -39,7 +38,6 @@ public class DeviceService {
             return new JsonMapper().writeValueAsString(devices);
         }
 
-
         return null;
     }
 
@@ -54,7 +52,37 @@ public class DeviceService {
                     .build();
         }
 
-
         return null;
+    }
+
+    public boolean addDeviceByEmailAndDeviceName(String email, String deviceName){
+        UserEntity user = userRepository.findByEmail(email);
+        DeviceEntity deviceEntity = DeviceEntity.builder()
+                                                .name(deviceName)
+                                                .user(user)
+                                                .build();
+
+        if(deviceRepository.save(deviceEntity).equals(deviceEntity)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean deleteDeviceByEmailAndDeviceName(String email, String deviceName){
+        UserEntity user = userRepository.findByEmail(email);
+        DeviceEntity deviceEntity = deviceRepository.findByNameAndUser_Idx(deviceName, user.getIdx());
+
+        try{
+            deviceRepository.delete(deviceEntity);
+            
+            if(deviceRepository.findById(deviceEntity.getIdx()).equals(Optional.empty())){
+                return true;
+            }
+
+            return false;
+        } catch (Exception e){
+            return false;
+        }
     }
 }
