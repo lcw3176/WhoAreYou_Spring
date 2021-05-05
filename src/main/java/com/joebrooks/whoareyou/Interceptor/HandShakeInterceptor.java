@@ -14,11 +14,12 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor {
     private final JwtTokenProvider jwtTokenProvider;
+    private final String headerName = "X-AUTH-TOKEN";
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
                                    Map<String, Object> attributes) throws Exception {
-        String token = request.getHeaders().get("X-AUTH-TOKEN").get(0);
+        String token = request.getHeaders().get(headerName).get(0);
         String email = jwtTokenProvider.getEmailFromClaims(token);
         attributes.put("email", email);
 
