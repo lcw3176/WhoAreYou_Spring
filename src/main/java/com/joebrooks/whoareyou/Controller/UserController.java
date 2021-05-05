@@ -13,15 +13,15 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @GetMapping("/{userId}/{userPw}")
-    public ResponseEntity trySignIn(@PathVariable("userId") String id, @PathVariable("userPw") String pw){
+    @GetMapping("/{email}/{userPw}")
+    public ResponseEntity trySignIn(@PathVariable("email") String email, @PathVariable("userPw") String pw){
 
-        if(!userService.isMember(id, pw)){
+        if(!userService.isMember(email, pw)){
             return ResponseEntity.notFound().build();
         }
 
         return ResponseEntity.ok()
-                .body(jwtTokenProvider.createToken(id));
+                .body(jwtTokenProvider.createToken(email));
     }
 
 

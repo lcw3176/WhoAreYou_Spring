@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class LogController {
     private final LogService logService;
 
-    @GetMapping("/{userId}/{deviceName}")
-    public ResponseEntity getLogs(@PathVariable("deviceName") String deviceName, @PathVariable("userId") String userId) throws JsonProcessingException {
-        String json = logService.getLogs(deviceName, userId);
+    @GetMapping("/{email}/{deviceName}")
+    public ResponseEntity getLogs(@PathVariable("deviceName") String deviceName, @PathVariable("email") String email) throws JsonProcessingException {
+        String json = logService.getLogs(deviceName, email);
 
         if(json != null){
             return ResponseEntity.ok().body(json);
