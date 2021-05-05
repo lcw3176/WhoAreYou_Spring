@@ -1,30 +1,23 @@
 package com.joebrooks.whoareyou.Controller;
 
-import com.joebrooks.whoareyou.Common.Response.ResponseCode;
-import com.joebrooks.whoareyou.Common.Response.ResponseResult;
-import com.joebrooks.whoareyou.DTO.Response;
 import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomErrorController implements ErrorController {
 
     @GetMapping("/error")
-    public Response showError(){
+    public ResponseEntity error(){
 
-        return Response.builder()
-                .code(ResponseCode.wrongRequest)
-                .result(ResponseResult.wrongRequest)
-                .build();
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/error/noAuth")
-    public Response showNoAuth(){
+    public ResponseEntity noAuth(){
 
-        return Response.builder()
-                .code(ResponseCode.notAllowed)
-                .result(ResponseResult.notAllowed)
-                .build();
+        return ResponseEntity.badRequest().build();
     }
 
     // Deprecated

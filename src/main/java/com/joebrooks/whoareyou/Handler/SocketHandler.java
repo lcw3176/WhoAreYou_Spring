@@ -1,9 +1,7 @@
 package com.joebrooks.whoareyou.Handler;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.joebrooks.whoareyou.Common.Response.ResponseCode;
 import com.joebrooks.whoareyou.DTO.Device;
-import com.joebrooks.whoareyou.DTO.Response;
 import com.joebrooks.whoareyou.Service.DeviceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -37,11 +35,7 @@ public class SocketHandler extends TextWebSocketHandler {
         for(var i : sessionMap.keySet()){
             if(i.equals(email)){
                 try{
-                    sessionMap.get(i).sendMessage(new TextMessage(Response.builder()
-                            .code(ResponseCode.success)
-                            .result(new JsonMapper().writeValueAsString(obj))
-                            .build()
-                            .toString()));   
+                    sessionMap.get(i).sendMessage(new TextMessage(new JsonMapper().writeValueAsString(obj)));
                 } catch (Exception e){
                     System.out.println("에러");
                 }
