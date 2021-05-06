@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
-    private String secretKey = "hello_Microprocessor";
+    @Value("${jwt.secretKey}")
+    private String secretKey;
 
     @PostConstruct
     protected void init(){
