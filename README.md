@@ -3,8 +3,8 @@ Microprocessor TeamProject API Server
 
 ### 기술 스택, 개발 환경
 * Java, Spring Boot
-* MySQL, JPA
-* WebSocket, jackson-json, lombok, Json Web Token 
+* MySQL, Spring Data JPA
+* WebSocket, jackson-json, Json Web Token 
 * Jetbrains IntelliJ
 ### DATABASE TABLE 
 - user table DDL
