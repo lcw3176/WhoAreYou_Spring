@@ -22,6 +22,6 @@ public class TokenCheckController {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(token);
     }
 }
