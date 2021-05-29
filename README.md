@@ -51,8 +51,8 @@ Microprocessor TeamProject API Server
 
 
 ### URL 구조
-|Task|Method|Path|Parameter|비고|
-|-----------|-----|--------|--------|---|
+|Task|Method|Path|Parameter|
+|-----------|-----|--------|--------|
 |회원가입|POST|/users|email,pw|
 |로그인|GET|/users/{email}/{pw}||
 |토큰 유효성 확인|GET|/validation/{token}||
