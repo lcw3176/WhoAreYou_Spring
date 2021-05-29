@@ -62,7 +62,8 @@ Microprocessor TeamProject API Server
 |기록 조회|GET|/auth/logs/{email}/{deviceName}|||
 |에러 페이지|GET|/error|||
 |권한 없는 접근|GET|/error/noAuth|||
-|소켓 접속||/auth/socket|||
+|소켓 접속||/auth/socket||특정 헤더 필수|
+|소켓 데이터 전달||쉼표로 구분|email, deviceName, state|기기 등록 처리|
 
 
 
