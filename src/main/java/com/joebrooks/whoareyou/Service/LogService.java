@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.joebrooks.whoareyou.DTO.Log;
 import com.joebrooks.whoareyou.Entity.DeviceEntity;
+import com.joebrooks.whoareyou.Entity.LogEntity;
 import com.joebrooks.whoareyou.Entity.UserEntity;
 import com.joebrooks.whoareyou.Repository.DeviceRepository;
 import com.joebrooks.whoareyou.Repository.LogRepository;
@@ -40,4 +41,15 @@ public class LogService {
 
         return null;
     }
+
+    public void saveLogs(String email, String deviceName, String state){
+        UserEntity user = userRepository.findByEmail(email);
+        DeviceEntity deviceEntity = deviceRepository.findByNameAndUser_Idx(deviceName, user.getIdx());
+
+        logRepository.save(LogEntity.builder()
+                .device(deviceEntity)
+                .state(state.equals("true") ? 1 : 0)
+                .build());
+    }
+
 }
