@@ -23,16 +23,7 @@ public class DeviceController {
         return ResponseEntity.notFound().build();
     }
 
-
-    @PostMapping
-    public ResponseEntity addDevice(@RequestParam("email") String userId, @RequestParam("name") String deviceName){
-        if(deviceService.addDeviceByEmailAndDeviceName(userId, deviceName)){
-            return ResponseEntity.ok().build();
-        }
-
-        return ResponseEntity.badRequest().build();
-    }
-
+    
     @DeleteMapping("/{email}/{deviceName}")
     public ResponseEntity deleteDevice(@PathVariable("email") String email, @PathVariable("deviceName") String deviceName){
         
