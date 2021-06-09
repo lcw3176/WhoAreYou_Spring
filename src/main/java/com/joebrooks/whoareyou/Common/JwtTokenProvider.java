@@ -46,10 +46,6 @@ public class JwtTokenProvider {
     }
 
 
-    public String resolveToken(HttpServletRequest request){
-        return request.getHeader("X-AUTH-TOKEN");
-    }
-
     public boolean isValidate(String jwtToken){
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
