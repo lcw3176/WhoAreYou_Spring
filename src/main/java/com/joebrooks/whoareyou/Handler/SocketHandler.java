@@ -39,9 +39,8 @@ public class SocketHandler extends TextWebSocketHandler {
             logService.saveLogs(email, deviceName, state);
         }
 
-        Device device = deviceService.getDeviceByEmailAndDeviceName(email, deviceName);
         HashMap<String, Object> obj = new HashMap<>();
-        obj.put("name", device.getName());
+        obj.put("name", deviceName);
         obj.put("state", state);
 
         for(var i : sessionMap.keySet()){
