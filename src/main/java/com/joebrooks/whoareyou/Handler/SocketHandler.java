@@ -2,7 +2,9 @@ package com.joebrooks.whoareyou.Handler;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.joebrooks.whoareyou.DTO.Device;
+import com.joebrooks.whoareyou.Repository.LogRepository;
 import com.joebrooks.whoareyou.Service.DeviceService;
+import com.joebrooks.whoareyou.Service.LogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 public class SocketHandler extends TextWebSocketHandler {
     private HashMap<String, WebSocketSession> sessionMap = new HashMap<>();
     private final DeviceService deviceService;
+    private final LogService logService;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) {
@@ -26,8 +29,17 @@ public class SocketHandler extends TextWebSocketHandler {
         String deviceName = values[1];
         String state = values[2];
 
-        Device device = deviceService.getDeviceByEmailAndDeviceName(email, deviceName);
+        if(state.equals("create")){
+            System.out.println(email);
+            System.out.println(deviceName + " 등록됨");
+            deviceService.addDeviceByEmailAndDeviceName(email, deviceName);
 
+        } else {
+            System.out.println(email + "에게 보냄:" + deviceName + "," + state);
+            logService.saveLogs(email, deviceName, state);
+        }
+
+        Device device = deviceService.getDeviceByEmailAndDeviceName(email, deviceName);
         HashMap<String, Object> obj = new HashMap<>();
         obj.put("name", device.getName());
         obj.put("state", state);
